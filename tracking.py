@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from tkinter import Tk, filedialog
 import os
 from datetime import datetime
+import paho.mqtt.client as mqtt
 
 # Charger le modèle YOLO
 model = YOLO('yolov8x.pt')
@@ -20,6 +21,14 @@ speed_plot_history = {}
 vehicle_alert_ids = []  # ID des véhicules en excès de vitesse
 
 SPEED_LIMIT = 130  # km/h
+
+mqtt_client = mqtt.Client()
+mqtt_client.connect("localhost", 1883, 60)  
+
+MQTT_TOPIC_SPEED = "vehicle/speed"
+MQTT_TOPIC_ALERT = "vehicle/alert"
+MQTT_TOPIC_COUNT = "vehicle/count"
+
 
 
 def select_video_file():
@@ -59,11 +68,12 @@ def select_roi(frame):
         """Fonction de callback pour dessiner un polygone avec la souris."""
         if event == cv2.EVENT_LBUTTONDOWN:  # Ajouter un point
             roi_polygon.append((x, y))
-
-    cv2.namedWindow("Select ROI")
-    cv2.setMouseCallback("Select ROI", draw_polygon)
-
     while True:
+
+        cv2.namedWindow("Select ROI")
+        cv2.setMouseCallback("Select ROI", draw_polygon)
+
+    
         temp_frame = frame.copy()
         # Dessiner le polygone
         if len(roi_polygon) > 1:
@@ -86,18 +96,27 @@ def select_roi(frame):
 def calculate_speed(obj_id, obj_coords_plan, fps):
     """Calcule la vitesse d'un véhicule en fonction de sa position."""
     if obj_id in car_position_plan:
-        old_x, old_y = car_position_plan[obj_id]
-        dx = abs(obj_coords_plan[0] - old_x)
-        dy = abs(obj_coords_plan[1] - old_y)
-        distance_meters = dy
-        speed_m_per_s = distance_meters * fps / 5
+        old_coords = car_position_plan[obj_id]
+        distance_meters = np.linalg.norm(np.array(obj_coords_plan) - np.array(old_coords))
+        speed_m_per_s = (distance_meters * fps) / 5  # Intervalle ajusté pour éviter les fluctuations
         speed_kmh = speed_m_per_s * 3.6
         car_speeds[obj_id] = speed_kmh
-        if obj_id not in speed_plot_history:
-            speed_plot_history[obj_id] = []
-        speed_plot_history[obj_id].append(speed_kmh)
-        return speed_kmh
+        return smooth_speed(obj_id, speed_kmh)
     return 0
+
+
+def smooth_speed(vehicle_id, new_speed):
+    """Lissage des vitesses en utilisant une moyenne glissante."""
+    if vehicle_id not in speed_plot_history:
+        speed_plot_history[vehicle_id] = []
+    speed_plot_history[vehicle_id].append(new_speed)
+
+    # Garder seulement les 5 dernières mesures pour le lissage
+    if len(speed_plot_history[vehicle_id]) > 5:
+        speed_plot_history[vehicle_id].pop(0)
+
+    return np.mean(speed_plot_history[vehicle_id])
+
 
 def save_roi(video_path, roi_polygon):
     """Sauvegarde la ROI dans un fichier JSON avec le chemin de la vidéo comme clé."""
@@ -110,12 +129,15 @@ def save_roi(video_path, roi_polygon):
     except FileNotFoundError:
         pass
 
+    # Ajouter la key si elle n'existe pas
+    if video_path not in data:
+        data[video_path] = {}
     
     # Mettre à jour ou ajouter la ROI pour cette vidéo
     data[video_path]["roi_polygon"] = roi_polygon
-    input("Veuillez définir les dimensions de l'autoroute en mode plan.")
+    road_length=int(input("Veuillez définir la longueur de l'autoroute en mode plan."))
     data[video_path]["road_length"] = road_length   # Ajouter la longueur de la route
-    input("Veuillez définir les dimensions de l'autoroute en mode plan.")
+    road_width=int(input("Veuillez définir la largeur de l'autoroute en mode plan."))
     data[video_path]["road_width"] = road_width     # Ajouter la largeur de la route
 
 
@@ -162,6 +184,20 @@ def log_speed_violation(vehicle_id, speed):
     with open("infractions.json", "w") as file:
         json.dump(infractions, file, indent=4)
     print(f"🚨 Infraction enregistrée : Véhicule {vehicle_id} à {speed} km/h")
+
+    # Publier une alerte via MQTT
+    alert_payload = json.dumps(infraction_data)
+    result=mqtt_client.publish(MQTT_TOPIC_ALERT, alert_payload)
+    result.wait_for_publish()
+    print(f"MQTT Payload publié sur {MQTT_TOPIC_ALERT}: {alert_payload}")
+
+def send_speed_data():
+    """Envoie les vitesses des véhicules via MQTT."""
+    speed_payload = json.dumps({str(vehicle_id): round(speed, 2) for vehicle_id, speed in car_speeds.items()})
+    result=mqtt_client.publish(MQTT_TOPIC_SPEED, speed_payload)
+    result.wait_for_publish()
+    print(f"MQTT Payload publié sur {MQTT_TOPIC_SPEED}: {speed_payload}")
+
 
 def process_video(video_path):
     """Traitement principal de la vidéo pour la détection et le suivi de véhicules."""
@@ -219,7 +255,7 @@ def process_video(video_path):
         roi_frame = frame[y:y+h, x:x+w]
 
         # Détection et suivi des véhicules
-        results = model.track(source=roi_frame, tracker="bytetrack.yaml", persist=True, stream=True)
+        results = model.track(source=roi_frame, tracker="bytetrack.yaml", persist=True, stream=True, conf=0.3)
         autoroute_plan.fill(255)
         detected_objects_in_plan.clear()
 
@@ -258,9 +294,11 @@ def process_video(video_path):
                     car_position_plan[obj_id] = obj_coords_plan
                     detected_objects_in_plan.append(obj_coords_plan)
 
+        send_speed_data()
         cv2.imshow('frame', frame)
         
-        plt.imshow(cv2.cvtColor(autoroute_plan, cv2.COLOR_BGR2RGB))
+        
+        """ plt.imshow(cv2.cvtColor(autoroute_plan, cv2.COLOR_BGR2RGB))
         if detected_objects_in_plan:
             plt.scatter(
                 [pt[0] for pt in detected_objects_in_plan],
@@ -274,7 +312,7 @@ def process_video(video_path):
         plt.xlim(0, road_width)
         plt.ylim(road_length, 0)
         plt.pause(0.01)
-        plt.clf()
+        plt.clf() """
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
