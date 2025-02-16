@@ -48,5 +48,750 @@
         "vehicle_id": 26,
         "speed": 145.81,
         "timestamp": "2025-02-09T12:32:21.167642"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 159.65,
+        "timestamp": "2025-02-12T11:13:10.135461"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 138.55,
+        "timestamp": "2025-02-12T11:13:15.103288"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 130.61,
+        "timestamp": "2025-02-12T11:13:23.367796"
+    },
+    {
+        "vehicle_id": 26,
+        "speed": 145.81,
+        "timestamp": "2025-02-12T11:14:12.266259"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 159.65,
+        "timestamp": "2025-02-12T11:20:10.214775"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 138.55,
+        "timestamp": "2025-02-12T11:20:15.076793"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 130.61,
+        "timestamp": "2025-02-12T11:20:23.144427"
+    },
+    {
+        "vehicle_id": 26,
+        "speed": 145.81,
+        "timestamp": "2025-02-12T11:21:11.769594"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 159.65,
+        "timestamp": "2025-02-12T11:25:17.680718"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 138.55,
+        "timestamp": "2025-02-12T11:25:22.516589"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 130.61,
+        "timestamp": "2025-02-12T11:25:30.789854"
+    },
+    {
+        "vehicle_id": 26,
+        "speed": 145.81,
+        "timestamp": "2025-02-12T11:26:19.114758"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 159.65,
+        "timestamp": "2025-02-12T11:30:11.679945"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 138.55,
+        "timestamp": "2025-02-12T11:30:16.862157"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 130.61,
+        "timestamp": "2025-02-12T11:30:26.372544"
+    },
+    {
+        "vehicle_id": 26,
+        "speed": 145.81,
+        "timestamp": "2025-02-12T11:31:23.100766"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 159.65,
+        "timestamp": "2025-02-12T11:36:36.475452"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 138.55,
+        "timestamp": "2025-02-12T11:36:41.269964"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 130.61,
+        "timestamp": "2025-02-12T11:36:49.685356"
+    },
+    {
+        "vehicle_id": 26,
+        "speed": 145.81,
+        "timestamp": "2025-02-12T11:37:36.905472"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 159.65,
+        "timestamp": "2025-02-12T12:18:54.513538"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 138.55,
+        "timestamp": "2025-02-12T12:18:59.451989"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 130.61,
+        "timestamp": "2025-02-12T12:19:07.914397"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 159.65,
+        "timestamp": "2025-02-12T12:20:25.293777"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 138.55,
+        "timestamp": "2025-02-12T12:20:30.075857"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 130.61,
+        "timestamp": "2025-02-12T12:20:38.388546"
+    },
+    {
+        "vehicle_id": 26,
+        "speed": 145.81,
+        "timestamp": "2025-02-12T12:21:26.279818"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 159.65,
+        "timestamp": "2025-02-12T12:22:44.456850"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 138.55,
+        "timestamp": "2025-02-12T12:22:49.468706"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 130.61,
+        "timestamp": "2025-02-12T12:22:57.902732"
+    },
+    {
+        "vehicle_id": 26,
+        "speed": 145.81,
+        "timestamp": "2025-02-12T12:23:45.491483"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 159.65,
+        "timestamp": "2025-02-12T12:26:55.686343"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 138.55,
+        "timestamp": "2025-02-12T12:27:00.561904"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 130.61,
+        "timestamp": "2025-02-12T12:27:08.950888"
+    },
+    {
+        "vehicle_id": 26,
+        "speed": 145.81,
+        "timestamp": "2025-02-12T12:27:56.365544"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 159.65,
+        "timestamp": "2025-02-12T12:28:32.343416"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 138.55,
+        "timestamp": "2025-02-12T12:28:37.195719"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 130.61,
+        "timestamp": "2025-02-12T12:28:45.429467"
+    },
+    {
+        "vehicle_id": 26,
+        "speed": 145.81,
+        "timestamp": "2025-02-12T12:29:32.651351"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 159.65,
+        "timestamp": "2025-02-12T12:30:20.049392"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 138.55,
+        "timestamp": "2025-02-12T12:30:24.832873"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 130.61,
+        "timestamp": "2025-02-12T12:30:32.918045"
+    },
+    {
+        "vehicle_id": 26,
+        "speed": 145.81,
+        "timestamp": "2025-02-12T12:31:20.340365"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 159.65,
+        "timestamp": "2025-02-12T12:33:06.016160"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 138.55,
+        "timestamp": "2025-02-12T12:33:10.889978"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 130.61,
+        "timestamp": "2025-02-12T12:33:19.107620"
+    },
+    {
+        "vehicle_id": 26,
+        "speed": 145.81,
+        "timestamp": "2025-02-12T12:34:06.821138"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 155.68,
+        "timestamp": "2025-02-12T16:03:59.312709"
+    },
+    {
+        "vehicle_id": 2,
+        "speed": 142.62,
+        "timestamp": "2025-02-12T16:04:04.381360"
+    },
+    {
+        "vehicle_id": 6,
+        "speed": 136.68,
+        "timestamp": "2025-02-12T16:04:18.325686"
+    },
+    {
+        "vehicle_id": 19,
+        "speed": 131.53,
+        "timestamp": "2025-02-12T16:04:24.528313"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 155.68,
+        "timestamp": "2025-02-12T16:06:08.951574"
+    },
+    {
+        "vehicle_id": 2,
+        "speed": 142.62,
+        "timestamp": "2025-02-12T16:06:13.620396"
+    },
+    {
+        "vehicle_id": 6,
+        "speed": 136.68,
+        "timestamp": "2025-02-12T16:06:27.651395"
+    },
+    {
+        "vehicle_id": 19,
+        "speed": 131.53,
+        "timestamp": "2025-02-12T16:06:33.859553"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 160.73,
+        "timestamp": "2025-02-12T16:14:48.024641"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 132.76,
+        "timestamp": "2025-02-12T16:14:51.556877"
+    },
+    {
+        "vehicle_id": 7,
+        "speed": 130.62,
+        "timestamp": "2025-02-12T16:15:00.407379"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 160.73,
+        "timestamp": "2025-02-12T16:16:25.481222"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 132.76,
+        "timestamp": "2025-02-12T16:16:28.315170"
+    },
+    {
+        "vehicle_id": 7,
+        "speed": 130.62,
+        "timestamp": "2025-02-12T16:16:38.376558"
+    },
+    {
+        "vehicle_id": 34,
+        "speed": 140.43,
+        "timestamp": "2025-02-12T16:17:27.214635"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 131.48,
+        "timestamp": "2025-02-12T16:19:17.730229"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 133.86,
+        "timestamp": "2025-02-12T16:19:22.036302"
+    },
+    {
+        "vehicle_id": 6,
+        "speed": 131.26,
+        "timestamp": "2025-02-12T16:19:34.562568"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 160.73,
+        "timestamp": "2025-02-12T16:24:22.790732"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 132.76,
+        "timestamp": "2025-02-12T16:24:25.911061"
+    },
+    {
+        "vehicle_id": 7,
+        "speed": 130.62,
+        "timestamp": "2025-02-12T16:24:39.240792"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 160.73,
+        "timestamp": "2025-02-12T16:27:02.542872"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 132.76,
+        "timestamp": "2025-02-12T16:27:07.859596"
+    },
+    {
+        "vehicle_id": 7,
+        "speed": 130.62,
+        "timestamp": "2025-02-12T16:27:18.319533"
+    },
+    {
+        "vehicle_id": 2,
+        "speed": 130.51,
+        "timestamp": "2025-02-13T21:54:43.828059"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 190.6,
+        "timestamp": "2025-02-13T21:54:43.936556"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 134.91,
+        "timestamp": "2025-02-13T21:54:53.214859"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 132.2,
+        "timestamp": "2025-02-13T21:56:57.727792"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 133.38,
+        "timestamp": "2025-02-13T21:57:00.487489"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 132.2,
+        "timestamp": "2025-02-13T22:03:42.471576"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 133.38,
+        "timestamp": "2025-02-13T22:03:45.155483"
+    },
+    {
+        "vehicle_id": 6,
+        "speed": 130.82,
+        "timestamp": "2025-02-13T22:03:54.480002"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 143.71,
+        "timestamp": "2025-02-13T22:07:48.398784"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 134.69,
+        "timestamp": "2025-02-13T22:07:50.437998"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 131.02,
+        "timestamp": "2025-02-13T22:07:54.456795"
+    },
+    {
+        "vehicle_id": 15,
+        "speed": 132.36,
+        "timestamp": "2025-02-13T22:08:05.020151"
+    },
+    {
+        "vehicle_id": 32,
+        "speed": 138.9,
+        "timestamp": "2025-02-13T22:08:15.924651"
+    },
+    {
+        "vehicle_id": 35,
+        "speed": 151.46,
+        "timestamp": "2025-02-13T22:08:21.203598"
+    },
+    {
+        "vehicle_id": 37,
+        "speed": 132.19,
+        "timestamp": "2025-02-13T22:08:22.391006"
+    },
+    {
+        "vehicle_id": 40,
+        "speed": 132.77,
+        "timestamp": "2025-02-13T22:08:25.648724"
+    },
+    {
+        "vehicle_id": 43,
+        "speed": 131.68,
+        "timestamp": "2025-02-13T22:08:33.840538"
+    },
+    {
+        "vehicle_id": 44,
+        "speed": 151.87,
+        "timestamp": "2025-02-13T22:08:37.162985"
+    },
+    {
+        "vehicle_id": 57,
+        "speed": 141.19,
+        "timestamp": "2025-02-13T22:08:46.323379"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 131.63,
+        "timestamp": "2025-02-13T22:14:59.149586"
+    },
+    {
+        "vehicle_id": 5,
+        "speed": 131.02,
+        "timestamp": "2025-02-13T22:15:03.789271"
+    },
+    {
+        "vehicle_id": 6,
+        "speed": 142.95,
+        "timestamp": "2025-02-13T22:15:04.659916"
+    },
+    {
+        "vehicle_id": 10,
+        "speed": 131.81,
+        "timestamp": "2025-02-13T22:15:19.830311"
+    },
+    {
+        "vehicle_id": 23,
+        "speed": 138.9,
+        "timestamp": "2025-02-13T22:15:24.892632"
+    },
+    {
+        "vehicle_id": 26,
+        "speed": 132.19,
+        "timestamp": "2025-02-13T22:15:31.054631"
+    },
+    {
+        "vehicle_id": 29,
+        "speed": 132.77,
+        "timestamp": "2025-02-13T22:15:34.142368"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 138.16,
+        "timestamp": "2025-02-13T22:17:45.448334"
+    },
+    {
+        "vehicle_id": 5,
+        "speed": 135.89,
+        "timestamp": "2025-02-13T22:17:49.407845"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 143.95,
+        "timestamp": "2025-02-13T22:18:05.357053"
+    },
+    {
+        "vehicle_id": 19,
+        "speed": 142.0,
+        "timestamp": "2025-02-13T22:18:10.583591"
+    },
+    {
+        "vehicle_id": 22,
+        "speed": 131.79,
+        "timestamp": "2025-02-13T22:18:16.775939"
+    },
+    {
+        "vehicle_id": 24,
+        "speed": 131.3,
+        "timestamp": "2025-02-13T22:18:21.186450"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 138.16,
+        "timestamp": "2025-02-13T22:19:43.181986"
+    },
+    {
+        "vehicle_id": 5,
+        "speed": 135.89,
+        "timestamp": "2025-02-13T22:19:47.425441"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 143.95,
+        "timestamp": "2025-02-13T22:20:05.476920"
+    },
+    {
+        "vehicle_id": 19,
+        "speed": 142.0,
+        "timestamp": "2025-02-13T22:20:11.567773"
+    },
+    {
+        "vehicle_id": 22,
+        "speed": 131.79,
+        "timestamp": "2025-02-13T22:20:19.049986"
+    },
+    {
+        "vehicle_id": 24,
+        "speed": 131.3,
+        "timestamp": "2025-02-13T22:20:23.995978"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 138.16,
+        "timestamp": "2025-02-13T22:23:43.263856"
+    },
+    {
+        "vehicle_id": 5,
+        "speed": 135.89,
+        "timestamp": "2025-02-13T22:23:47.276919"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 143.95,
+        "timestamp": "2025-02-13T22:24:02.818843"
+    },
+    {
+        "vehicle_id": 19,
+        "speed": 142.0,
+        "timestamp": "2025-02-13T22:24:07.905160"
+    },
+    {
+        "vehicle_id": 22,
+        "speed": 131.79,
+        "timestamp": "2025-02-13T22:24:14.141157"
+    },
+    {
+        "vehicle_id": 24,
+        "speed": 131.3,
+        "timestamp": "2025-02-13T22:24:18.400805"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 138.16,
+        "timestamp": "2025-02-13T22:27:08.415909"
+    },
+    {
+        "vehicle_id": 5,
+        "speed": 135.89,
+        "timestamp": "2025-02-13T22:27:12.570621"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 143.95,
+        "timestamp": "2025-02-13T22:27:28.570981"
+    },
+    {
+        "vehicle_id": 19,
+        "speed": 142.0,
+        "timestamp": "2025-02-13T22:27:33.817746"
+    },
+    {
+        "vehicle_id": 22,
+        "speed": 131.79,
+        "timestamp": "2025-02-13T22:27:40.164862"
+    },
+    {
+        "vehicle_id": 24,
+        "speed": 131.3,
+        "timestamp": "2025-02-13T22:27:44.338454"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 138.16,
+        "timestamp": "2025-02-13T22:29:15.948650"
+    },
+    {
+        "vehicle_id": 5,
+        "speed": 135.89,
+        "timestamp": "2025-02-13T22:29:20.831620"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 143.95,
+        "timestamp": "2025-02-13T22:29:37.166690"
+    },
+    {
+        "vehicle_id": 19,
+        "speed": 142.0,
+        "timestamp": "2025-02-13T22:29:42.440333"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 131.79,
+        "timestamp": "2025-02-13T22:29:49.002307"
+    },
+    {
+        "vehicle_id": 5,
+        "speed": 131.3,
+        "timestamp": "2025-02-13T22:29:52.981140"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 138.16,
+        "timestamp": "2025-02-13T22:36:22.846719"
+    },
+    {
+        "vehicle_id": 5,
+        "speed": 135.89,
+        "timestamp": "2025-02-13T22:36:26.658106"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 143.95,
+        "timestamp": "2025-02-13T22:36:42.442306"
+    },
+    {
+        "vehicle_id": 19,
+        "speed": 142.0,
+        "timestamp": "2025-02-13T22:36:47.743498"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 131.79,
+        "timestamp": "2025-02-13T22:36:54.991690"
+    },
+    {
+        "vehicle_id": 5,
+        "speed": 131.3,
+        "timestamp": "2025-02-13T22:37:01.193366"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 138.16,
+        "timestamp": "2025-02-13T22:37:25.900762"
+    },
+    {
+        "vehicle_id": 5,
+        "speed": 135.89,
+        "timestamp": "2025-02-13T22:37:29.536779"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 143.95,
+        "timestamp": "2025-02-13T22:37:45.094852"
+    },
+    {
+        "vehicle_id": 19,
+        "speed": 142.0,
+        "timestamp": "2025-02-13T22:37:50.468316"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 131.79,
+        "timestamp": "2025-02-13T22:37:57.158047"
+    },
+    {
+        "vehicle_id": 5,
+        "speed": 131.3,
+        "timestamp": "2025-02-13T22:38:01.289696"
+    },
+    {
+        "vehicle_id": 10,
+        "speed": 132.27,
+        "timestamp": "2025-02-13T22:38:16.398964"
+    },
+    {
+        "vehicle_id": 19,
+        "speed": 141.83,
+        "timestamp": "2025-02-13T22:38:21.933548"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 134.81,
+        "timestamp": "2025-02-13T22:38:29.420259"
+    },
+    {
+        "vehicle_id": 4,
+        "speed": 135.95,
+        "timestamp": "2025-02-13T22:38:33.284300"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 135.15,
+        "timestamp": "2025-02-16T17:16:55.533568"
+    },
+    {
+        "vehicle_id": 5,
+        "speed": 138.89,
+        "timestamp": "2025-02-16T17:16:59.647863"
+    },
+    {
+        "vehicle_id": 8,
+        "speed": 184.29,
+        "timestamp": "2025-02-16T17:17:16.070874"
+    },
+    {
+        "vehicle_id": 19,
+        "speed": 142.0,
+        "timestamp": "2025-02-16T17:17:21.427327"
+    },
+    {
+        "vehicle_id": 3,
+        "speed": 144.22,
+        "timestamp": "2025-02-16T17:17:28.270075"
+    },
+    {
+        "vehicle_id": 5,
+        "speed": 138.32,
+        "timestamp": "2025-02-16T17:17:32.050259"
     }
 ]

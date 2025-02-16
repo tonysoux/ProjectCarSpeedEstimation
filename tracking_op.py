@@ -40,7 +40,6 @@ def send_status():
     result.wait_for_publish()
     print(f"MQTT Payload publié sur vehicle/status: {status_payload}")
 
-
 # Modifier on_message pour envoyer un état en retour
 def on_message(client, userdata, message):
     """Gère les commandes envoyées par Node-RED pour démarrer ou arrêter la détection."""
@@ -98,7 +97,7 @@ def calculate_speed(obj_id, obj_coords_plan, fps):
     if obj_id in car_position_plan:
         old_coords = car_position_plan[obj_id]
         distance_meters = np.linalg.norm(np.array(obj_coords_plan) - np.array(old_coords))
-        speed_m_per_s = (distance_meters * fps) / 5  
+        speed_m_per_s = (distance_meters * fps) / 5  # Intervalle ajusté pour éviter les fluctuations
         speed_kmh = speed_m_per_s * 3.6
         car_speeds[obj_id] = speed_kmh
         return smooth_speed(obj_id, speed_kmh)
@@ -111,8 +110,8 @@ def smooth_speed(vehicle_id, new_speed):
         speed_plot_history[vehicle_id] = []
     speed_plot_history[vehicle_id].append(new_speed)
 
-    
-    if len(speed_plot_history[vehicle_id]) > 3:
+    # Garder seulement les 5 dernières mesures pour le lissage
+    if len(speed_plot_history[vehicle_id]) > 5:
         speed_plot_history[vehicle_id].pop(0)
 
     return np.mean(speed_plot_history[vehicle_id])
