@@ -1,1 +1,2 @@
-{"data/vehicles.mp4": {"roi_polygon": [[314, 198], [575, 200], [838, 326], [142, 328]], "road_length": 200, "road_width": 25}, "data/sample_video.mp4": {"roi_polygon": [[404, 231], [569, 224], [737, 346], [60, 428]], "road_length": 106, "road_width": 25}}
+{"data/vehicles.mp4": {"roi_polygon": [[314, 198], [575, 200], [838, 326], [142, 328]], "road_length": 200, "road_width": 25}, "data/sample_video.mp4": {"roi_polygon": [[568, 221], [416, 223], [69, 416], [839, 416]], "road_length": 120, "road_width": 25}}
+

@@ -8,11 +8,10 @@ import matplotlib.pyplot as plt
 import ssl
 import base64
 import io
-import threading
 
 car_position_plan = {}
 car_speeds = {}  
-car_speed_history = {}
+speed_plot_history = {}
 vehicle_alert_ids = []  
 
 SPEED_LIMIT = 130  
@@ -22,70 +21,54 @@ video_path = "data/vehicles.mp4"
 video_running = True 
 
 # Configuration MQTT
-BROKER = "172.20.10.6" 
+BROKER = "elec_auto_project"  # Remplace par l'IP de ton serveur si nécessaire
 PORT = 8883  # Port sécurisé
 TOPIC = "test/topic"
-CA_CERT = "certs/ca.crt"
-CLIENT_CERT = "certs/client.crt"
-CLIENT_KEY = "certs/client.key"
+CA_CERT = "C:/mosquitto/certs/ca.crt"
+CLIENT_CERT = "C:/mosquitto/certs/client.crt"
+CLIENT_KEY = "C:/mosquitto/certs/client.key"
 MQTT_TOPIC_SPEED = "vehicle/speed"
 MQTT_TOPIC_ALERT = "vehicle/alert"
 MQTT_TOPIC_COUNT = "vehicle/count"
 MQTT_TOPIC_STATUS = "vehicle/status"
-MQTT_TOPIC_COMMAND = "vehicle/activation"  
+MQTT_TOPIC_COMMAND = "vehicle/detection_command"  
 MQTT_TOPIC_VIDEO = "video"
 MQTT_TOPIC_MATPLOTLIB = "video/matplotlib"
 
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
-        print("✅ Connexion réussie au broker MQTT")
-        client.subscribe(MQTT_TOPIC_COMMAND)
-        print(f"📡 Abonné au topic: {MQTT_TOPIC_COMMAND}")
+        print("Connexion réussie au broker !")
+        client.subscribe(TOPIC)
     else:
-        print(f"❌ Échec de connexion au broker, code {rc}")
+        print(f"Échec de la connexion, code {rc}")
 
 # Modifier on_message pour envoyer un état en retour
 def on_message(client, userdata, message):
+    """Gère les commandes envoyées par Node-RED pour démarrer ou arrêter la détection."""
     global video_running
-    print(f"📩 Message reçu sur {message.topic}: {message.payload.decode()}")
+    command = message.payload.decode("utf-8")
     
-    command = message.payload.decode("utf-8").strip().lower()
-
-    if command == "true":
+    if command == "START":
         print("🚦 Démarrage de la détection demandé par Node-RED.")
         video_running = True
-    elif command == "false":
+    elif command == "STOP":
         print("🛑 Arrêt de la détection demandé par Node-RED.")
         video_running = False
 
+    send_status()  # Envoyer l'état mis à jour
 
 def setup_mqtt():
     """Configure et connecte le client MQTT."""
     client = mqtt.Client()
-
-    # Activer TLS
     client.tls_set(ca_certs=CA_CERT, certfile=CLIENT_CERT, keyfile=CLIENT_KEY, tls_version=ssl.PROTOCOL_TLSv1_2)
-
-    # Authentification
     client.username_pw_set("projet_elec_auto", "SouxPaulM2")
-
-    # Attacher les callbacks
     client.on_connect = on_connect
     client.on_message = on_message
-
-    # Connexion au broker
-    print("🔄 Tentative de connexion au broker...")
     client.connect(BROKER, PORT, 60)
-
-    print("✅ Connexion MQTT réussie, lancement du loop...")
-    client.loop_start() 
+    client.loop_start()
     return client
 
-
-
 mqtt_client = setup_mqtt()
-
-
 
 def send_status():
     """Envoie l'état de la détection à Node-RED."""
@@ -110,6 +93,11 @@ def send_matplotlib_figure():
     mqtt_client.publish("video/matplotlib", jpg_as_text)
     print("MQTT Payload publié sur video/matplotlib")
 
+
+
+mqtt_client.subscribe(MQTT_TOPIC_COMMAND)
+mqtt_client.on_message = on_message
+mqtt_client.loop_start()
 
 def select_roi(frame):
     """Permet à l'utilisateur de sélectionner une région d'intérêt (ROI) sur une image."""
@@ -144,28 +132,31 @@ def select_roi(frame):
 
 
 
-def calculate_speed(obj_id, obj_coords_plan, fps, road_length):
-    if fps <= 0:
-        return None
-    if obj_coords_plan[1] < 10 or obj_coords_plan[1] > road_length - 10:
-        return None
+def calculate_speed(obj_id, obj_coords_plan, fps):
+    """Calcule la vitesse d'un véhicule en fonction de sa position."""
     if obj_id in car_position_plan:
+        if obj_coords_plan[1] < 10 or obj_coords_plan[1] > road_length - 10:
+            return None
         old_coords = car_position_plan[obj_id]
         distance_meters = abs(obj_coords_plan[1] - old_coords[1])
-        speed_m_per_s = (distance_meters * fps) / 5
+        speed_m_per_s = (distance_meters * fps) / 5 
         speed_kmh = speed_m_per_s * 3.6
         car_speeds[obj_id] = speed_kmh
         return smooth_speed(obj_id, speed_kmh)
     return None
 
-def smooth_speed(obj_id, new_speed):
-    if obj_id not in car_speed_history:
-        car_speed_history[obj_id] = [new_speed]
-    else:
-        car_speed_history[obj_id].append(new_speed)
-        if len(car_speed_history[obj_id]) > 5:
-            car_speed_history[obj_id].pop(0)
-    return sum(car_speed_history[obj_id]) / len(car_speed_history[obj_id])
+
+def smooth_speed(vehicle_id, new_speed):
+    """Lissage des vitesses en utilisant une moyenne glissante."""
+    if vehicle_id not in speed_plot_history:
+        speed_plot_history[vehicle_id] = []
+    speed_plot_history[vehicle_id].append(new_speed)
+
+    
+    """ if len(speed_plot_history[vehicle_id]) < 3:
+        return None """
+
+    return new_speed
 
 
 def save_roi(video_path, roi_polygon):
@@ -259,7 +250,7 @@ def process_video(video_path):
         roi_polygon = select_roi(frame)
         save_roi(video_path, roi_polygon)
         roi_data = load_roi(video_path)
-    model = YOLO("best.pt")
+
     roi_polygon = np.array(roi_data["roi_polygon"], dtype=np.int32)
     road_length = roi_data["road_length"]
     road_width = roi_data["road_width"]
@@ -273,11 +264,11 @@ def process_video(video_path):
     while True:  # Boucle infinie pour faire tourner la vidéo en continu
         cap.set(cv2.CAP_PROP_POS_FRAMES, 0)  # Redémarrer la vidéo à chaque fin de lecture
         # Charger le modèle YOLO
-        #model = YOLO("best.pt")
-        #car_position_plan.clear()  
-        #car_speed_history.clear()
-        #vehicle_alert_ids.clear()
-        #detected_objects_in_plan.clear()
+        model = YOLO("best.pt")
+        car_position_plan.clear()  
+        speed_plot_history.clear()
+        vehicle_alert_ids.clear()
+        detected_objects_in_plan.clear()
         while cap.isOpened():
             ret, frame = cap.read()
             if not ret:
@@ -292,6 +283,7 @@ def process_video(video_path):
             frame = cv2.addWeighted(overlay, 0.8, frame, 0.2, 0)
             x, y, w, h = cv2.boundingRect(roi_polygon)
             roi_frame = frame[y:y+h, x:x+w]
+
             if video_running:
                 results = model.track(source=frame, tracker="bytetrack.yaml", persist=True, stream=True, conf=0.3)
                 autoroute_plan.fill(255)
@@ -306,9 +298,12 @@ def process_video(video_path):
 
                     for box, obj_id in zip(boxes, ids):
                         x1, y_top, x2, y_bottom= box
+                        x1 += x
+                        x2 += x
+                        y_top += y
+                        y_bottom += y
                         x_center = (x1 + x2) / 2
 
-                        cv2.circle(frame, (int(x_center), int(y_bottom)), 5, (0, 255, 0), -1)   
                         if cv2.pointPolygonTest(roi_polygon, (x_center, y_bottom), False) >= 0:
                             cv2.rectangle(frame, (int(x1), int(y_top)), (int(x2), int(y_bottom)), (255, 0, 0), 2)
                             cv2.putText(frame, f"ID: {int(obj_id)}", (int(x1), int(y_top) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
@@ -316,7 +311,7 @@ def process_video(video_path):
                             obj_coords = np.array([[x_center, y_bottom]], dtype=np.float32)
                             obj_coords_plan = cv2.perspectiveTransform(obj_coords[None, :, :], matrix)[0][0]
 
-                            speed_kmh = calculate_speed(obj_id, obj_coords_plan, cap.get(cv2.CAP_PROP_FPS), road_length)
+                            speed_kmh = calculate_speed(obj_id, obj_coords_plan, cap.get(cv2.CAP_PROP_FPS))
                             if speed_kmh is not None:
                                 car_speeds[obj_id] = speed_kmh
                                 if speed_kmh > SPEED_LIMIT and obj_id not in vehicle_alert_ids:
@@ -343,20 +338,15 @@ def process_video(video_path):
                 plt.title("Plan View")
                 plt.xlim(0, road_width)
                 plt.ylim(road_length, 0)
-                send_matplotlib_figure()
                 plt.pause(0.01)
                 plt.clf()
                 send_speed_data(car_speeds)
-                
 
             cv2.imshow('frame', frame)
             send_video(frame)
-            
-            if not video_running:
-                print("🛑 Détection arrêtée par Node-RED. En attente d'un redémarrage...")
-                cv2.waitKey(500)  
-                continue  
+            send_matplotlib_figure()
 
+            
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 cap.release()
